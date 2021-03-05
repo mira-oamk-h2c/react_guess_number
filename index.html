@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Guess number</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+  <!-- Don't use this in production: -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    form {
+      margin: 2em;
+    }
+    button {
+      margin-left: 1em;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    class Question extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          number: 0,
+          answer: ''
+        }
+      }
+
+      componentDidMount() {
+        const randomized = Math.floor(Math.random() * 6);
+
+        this.setState({
+          number: randomized,
+        });
+      }
+
+      handleChange = (event) => {
+        this.setState({ answer: event.target.value });
+      }
+
+      handleSubmit = (event) => {
+        const { number, answer } = this.state;
+
+        if (number == answer) {
+          alert('Correct!');
+        } else {
+          alert('Wrong! My number was ' + number);
+        }
+
+        const randomized = Math.floor(Math.random() * 6);
+
+        this.setState({
+          answer: '',
+          number: randomized,
+        });
+
+        event.preventDefault();
+
+      }
+
+      render() {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            <input type="number" value={this.state.answer} onChange={this.handleChange} />
+            <button>Guess</button>
+          </form>
+        )
+      }
+
+    }
+
+    ReactDOM.render(<Question />, document.getElementById('root'));
+
+  </script>
+
+</body>
+
+</html>
