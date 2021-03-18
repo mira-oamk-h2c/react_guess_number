@@ -34,7 +34,7 @@
       }
 
       componentDidMount() {
-        const randomized = Math.floor(Math.random() * 6);
+        const randomized = Math.floor(Math.random() * 6) + 1;
 
         this.setState({
           number: randomized,
@@ -54,7 +54,7 @@
           alert('Wrong! My number was ' + number);
         }
 
-        const randomized = Math.floor(Math.random() * 6);
+        const randomized = Math.floor(Math.random() * 6) + 1;
 
         this.setState({
           answer: '',
